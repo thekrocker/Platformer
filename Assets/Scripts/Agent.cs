@@ -32,6 +32,15 @@ public class Agent : MonoBehaviour
         }
     }
 
+    #region Summary
+
+    /// <summary>
+    /// Checks if user moves.
+    /// </summary>
+    /// <param name=" "></param>
+    /// <returns>Returns true if user is not moving</returns>
+
+    #endregion
     private bool IsIdle()
     {
         return Mathf.Abs(rb.velocity.x) < 0.01f;

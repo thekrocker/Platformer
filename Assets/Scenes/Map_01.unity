@@ -256,6 +256,7 @@ GameObject:
   - component: {fileID: 467202838}
   - component: {fileID: 467202837}
   - component: {fileID: 467202839}
+  - component: {fileID: 467202840}
   m_Layer: 0
   m_Name: Agent
   m_TagString: Untagged
@@ -313,10 +314,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b31a46b77042acb488a605ea7a64272e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 467202837}
   agentRenderer: {fileID: 1703744241}
   agentInput: {fileID: 663285691}
+  rb: {fileID: 467202837}
   agentAnim: {fileID: 1703744240}
+  states:
+  - {fileID: 1258451105}
+  - {fileID: 1258451106}
+  currentState: {fileID: 0}
+  previousState: {fileID: 0}
+  idleState: {fileID: 1258451105}
+  stateName: 
+--- !u!114 &467202840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 467202836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5329a54fb57b4aaabb1128c80a5d12c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &570187033 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 148383989529664366, guid: 3972d8c0700c0cf4f82497b59aa29929, type: 3}
@@ -1329,6 +1349,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1258451104}
   - component: {fileID: 1258451105}
+  - component: {fileID: 1258451106}
   m_Layer: 0
   m_Name: States
   m_TagString: Untagged
@@ -1368,7 +1389,30 @@ MonoBehaviour:
   onExit:
     m_PersistentCalls:
       m_Calls: []
-  moveState: {fileID: 0}
+  moveState: {fileID: 1258451106}
+--- !u!114 &1258451106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258451103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee8c214ea0740c19f0eefa96f6f51e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onExit:
+    m_PersistentCalls:
+      m_Calls: []
+  movementData: {fileID: 0}
+  idleState: {fileID: 1258451105}
+  acceleration: 50
+  deacceleration: 50
+  maxSpeed: 6
 --- !u!4 &1366952005 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2052790976440808658, guid: 4430711e4251cfe4fa1a05d82ab5e6df, type: 3}

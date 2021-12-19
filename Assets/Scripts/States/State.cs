@@ -71,7 +71,7 @@ namespace States
 
         public virtual void ExitState()
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }

@@ -13,7 +13,7 @@ namespace States
 
         protected override void HandleMovement(Vector2 input)
         {
-            if (Mathf.Abs(input.x) > 0) Agent.TransitionToNextState(moveState, this); // Change to next state
+            if (Mathf.Abs(input.x) > 0) Agent.TransitionToNextState(moveState); // Change to next state
         }
     }
 }

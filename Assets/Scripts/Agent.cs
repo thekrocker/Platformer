@@ -6,38 +6,38 @@ using UnityEngine;
 
 public class Agent : MonoBehaviour
 {
-    public Rigidbody2D rb;
     [SerializeField] private AgentRenderer agentRenderer; // for scale flip
-
     [SerializeField] private PlayerInput agentInput;
+
     public PlayerInput AgentInput
     {
         get => agentInput;
         set => agentInput = value;
     }
 
+    public Rigidbody2D rb;
     public AgentAnimation agentAnim;
-    
-    
-    private void Start()
+
+   
+    [Header("State Debug")] 
+    public string stateName = "";
+    public State currentState = null, previousState = null;
+    public State idleState;
+
+
+
+    private void Awake()
     {
-        AgentInput.OnMovement += HandleMovement;
-        AgentInput.OnMovement += agentRenderer.HandleFlipDirection;
+        State[] states = GetComponentsInChildren<State>();
+        foreach (State state in states) state.InitializeState(this);
     }
 
-    private void HandleMovement(Vector2 input)
+    private void Start()
     {
-        if (Mathf.Abs(input.x) > 0)
-        {
-            if (IsInputValueEmpty()) agentAnim.PlayAnimation(AnimationType.Run);
-            rb.velocity = new Vector2(input.x * 5, rb.velocity.y);
-        }
-        else
-        {
-            if (!IsInputValueEmpty()) agentAnim.PlayAnimation(AnimationType.Idle);
-            rb.velocity = new Vector2(0, rb.velocity.y);
-        }
+        AgentInput.OnMovement += agentRenderer.HandleFlipDirection;
+        TransitionToNextState(idleState); // Set start state as idle.
     }
+
 
     #region Summary
 
@@ -48,13 +48,37 @@ public class Agent : MonoBehaviour
     /// <returns>Returns true if user is not moving</returns>
 
     #endregion
+
     internal bool IsInputValueEmpty()
     {
         return Mathf.Abs(rb.velocity.x) < 0.01f;
     }
 
-    public void TransitionToNextState(State nextState, State callingState)
+    public void TransitionToNextState(State nextState)
     {
-        throw new NotImplementedException();
+        if (nextState == null) return;
+        if (currentState != null) currentState.Exit();
+        previousState = currentState;
+        currentState = nextState;
+        currentState.Enter();
+        DisplayState();
+    }
+
+    private void DisplayState()
+    {
+        if (previousState == null || previousState.GetType() != currentState.GetType())
+        {
+            stateName = currentState.GetType().ToString();
+        }
+    }
+
+    private void Update()
+    {
+        currentState.UpdateState();
+    }
+
+    private void FixedUpdate()
+    {
+        currentState.FixedUpdateState();
     }
 }

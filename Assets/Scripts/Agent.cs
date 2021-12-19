@@ -6,8 +6,11 @@ using UnityEngine;
 
 public class Agent : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private AgentRenderer agentRenderer; // for scale flip
     [SerializeField] private PlayerInput agentInput;
+    public Rigidbody2D rb;
+    public AgentAnimation agentAnim;
 
     public PlayerInput AgentInput
     {
@@ -15,8 +18,6 @@ public class Agent : MonoBehaviour
         set => agentInput = value;
     }
 
-    public Rigidbody2D rb;
-    public AgentAnimation agentAnim;
 
    
     [Header("State Debug")] 

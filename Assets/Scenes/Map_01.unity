@@ -318,13 +318,10 @@ MonoBehaviour:
   agentInput: {fileID: 663285691}
   rb: {fileID: 467202837}
   agentAnim: {fileID: 1703744240}
-  states:
-  - {fileID: 1258451105}
-  - {fileID: 1258451106}
+  stateName: 
   currentState: {fileID: 0}
   previousState: {fileID: 0}
   idleState: {fileID: 1258451105}
-  stateName: 
 --- !u!114 &467202840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1471,7 +1468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2052790976440808659, guid: 4430711e4251cfe4fa1a05d82ab5e6df, type: 3}
       propertyPath: m_Name
-      value: sky-1 (1)
+      value: sky-1_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4430711e4251cfe4fa1a05d82ab5e6df, type: 3}

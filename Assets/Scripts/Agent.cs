@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using States;
 using UnityEngine;
 
 public class Agent : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private AgentAnimation agentAnim;
     [SerializeField] private AgentRenderer agentRenderer; // for scale flip
 
     [SerializeField] private PlayerInput agentInput;
@@ -16,6 +16,9 @@ public class Agent : MonoBehaviour
         set => agentInput = value;
     }
 
+    public AgentAnimation agentAnim;
+    
+    
     private void Start()
     {
         AgentInput.OnMovement += HandleMovement;
@@ -26,12 +29,12 @@ public class Agent : MonoBehaviour
     {
         if (Mathf.Abs(input.x) > 0)
         {
-            if (IsIdle()) agentAnim.PlayAnimation(AnimationType.Run);
+            if (IsInputValueEmpty()) agentAnim.PlayAnimation(AnimationType.Run);
             rb.velocity = new Vector2(input.x * 5, rb.velocity.y);
         }
         else
         {
-            if (!IsIdle()) agentAnim.PlayAnimation(AnimationType.Idle);
+            if (!IsInputValueEmpty()) agentAnim.PlayAnimation(AnimationType.Idle);
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
     }
@@ -45,8 +48,13 @@ public class Agent : MonoBehaviour
     /// <returns>Returns true if user is not moving</returns>
 
     #endregion
-    private bool IsIdle()
+    internal bool IsInputValueEmpty()
     {
         return Mathf.Abs(rb.velocity.x) < 0.01f;
+    }
+
+    public void TransitionToNextState(State nextState, State callingState)
+    {
+        throw new NotImplementedException();
     }
 }

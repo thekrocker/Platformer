@@ -7,29 +7,29 @@ namespace States
     {
         [SerializeField] private UnityEvent onEnter;
         [SerializeField] private UnityEvent onExit;
-        private Agent _agent;
+        protected Agent Agent;
 
         public void InitializeState(Agent agent)
         {
-            _agent = agent;
+            Agent = agent;
         }
 
         public void Enter()
         {
-            _agent.AgentInput.OnAttack += HandleAttack;
-            _agent.AgentInput.OnJumpPressed += HandleJumpPressed;
-            _agent.AgentInput.OnJumpReleased += HandleJumpReleased;
-            _agent.AgentInput.OnMovement += HandleMovement;
+            Agent.AgentInput.OnAttack += HandleAttack;
+            Agent.AgentInput.OnJumpPressed += HandleJumpPressed;
+            Agent.AgentInput.OnJumpReleased += HandleJumpReleased;
+            Agent.AgentInput.OnMovement += HandleMovement;
             onEnter?.Invoke();
             EnterState();
         }
 
-        private void EnterState()
+        protected virtual void EnterState()
         {
            
         }
 
-        protected virtual void HandleMovement(Vector2 obj)
+        protected virtual void HandleMovement(Vector2 input)
         {
             
         }
@@ -61,15 +61,15 @@ namespace States
 
         public void Exit()
         {
-            _agent.AgentInput.OnAttack -= HandleAttack;
-            _agent.AgentInput.OnJumpPressed -= HandleJumpPressed;
-            _agent.AgentInput.OnJumpReleased -= HandleJumpReleased;
-            _agent.AgentInput.OnMovement -= HandleMovement;
+            Agent.AgentInput.OnAttack -= HandleAttack;
+            Agent.AgentInput.OnJumpPressed -= HandleJumpPressed;
+            Agent.AgentInput.OnJumpReleased -= HandleJumpReleased;
+            Agent.AgentInput.OnMovement -= HandleMovement;
             onExit?.Invoke();
             ExitState();
         }
 
-        private void ExitState()
+        public virtual void ExitState()
         {
             throw new System.NotImplementedException();
         }

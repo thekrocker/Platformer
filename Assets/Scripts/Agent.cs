@@ -5,17 +5,21 @@ using UnityEngine;
 
 public class Agent : MonoBehaviour
 {
-    [SerializeField] private PlayerInput playerInput;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private AgentAnimation agentAnim;
     [SerializeField] private AgentRenderer agentRenderer; // for scale flip
-    
 
+    [SerializeField] private PlayerInput agentInput;
+    public PlayerInput AgentInput
+    {
+        get => agentInput;
+        set => agentInput = value;
+    }
 
     private void Start()
     {
-        playerInput.OnMovement += HandleMovement;
-        playerInput.OnMovement += agentRenderer.HandleFlipDirection;
+        AgentInput.OnMovement += HandleMovement;
+        AgentInput.OnMovement += agentRenderer.HandleFlipDirection;
     }
 
     private void HandleMovement(Vector2 input)

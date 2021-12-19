@@ -22,5 +22,5 @@ public class AgentRenderer : MonoBehaviour
     }
 }
 
-        // ? Mathf.Sign Return value is 1 when f is positive or zero, so it means if we are moving on right side, it will return "1", so when we multiply with abs value localscale (1) => its scale will be 1.
-        // ? If input.x is negative it will return -1f. And it multiplies by localScale absolute value. So if we are pressing left, it's scale will be -1. 
+        // ? Mathf.Sign returns 1 when given value is positive or zero, so it means if we are moving on right side (if our input.x is positive), it will return "1", so when we multiply with abs value localscale.x (1) =>  1.
+        // ? If input.x is negative it will return -1f. So when we multiply with abs value localscale.x (1) * (-1) => -1;
